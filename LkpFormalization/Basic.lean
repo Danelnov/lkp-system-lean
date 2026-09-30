@@ -58,22 +58,6 @@ def weakening_right (A : PropForm) : BNTree Sequent → Option (BNTree Sequent)
   | T@(node _ (Γ, Δ) _) => T.insert_right (Γ, Δ ++ [A])
   | _ => none
 
-def contraction_left : BNTree Sequent → Option (BNTree Sequent)
-  | T@(node _ (A :: B :: Γ, Δ) _) =>
-      if A = B then T.insert_right (A :: Γ, Δ) else none
-  | _ => none
-
-def contraction_right : BNTree Sequent → Option (BNTree Sequent)
-  | T@(node _ (Γ, Δ) _) =>
-      match Δ.reverse with
-        | A :: B :: Δ' =>
-          if A = B then
-            T.insert_right (Γ, (A::Δ').reverse)
-          else
-            none
-        | _ => none
-  | _ => none
-
 def cut : BNTree Sequent → BNTree Sequent → Option (BNTree Sequent)
   | T₁@(node _ (Γ, Δ) _), T₂@(node _ (A :: Λ, Θ) _) =>
     match Δ.reverse with
