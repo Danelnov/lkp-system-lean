@@ -1,7 +1,6 @@
 import Lean
 import LkpFormalization.Basic
-import LkpFormalization.BinaryTree
-import LkpFormalization.Rules
+import LkpFormalization.Data
 import LkpFormalization.Notation
 import TypstInfoview
 

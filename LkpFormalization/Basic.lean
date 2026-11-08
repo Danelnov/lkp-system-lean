@@ -1,5 +1,4 @@
 import TypstInfoview.Basic
-
 namespace LkpFormalization
 
 inductive PropForm
@@ -62,5 +61,7 @@ instance : ToTypst Sequent where
 
 def Sequent.antecedent (s : Sequent) : List PropForm := s.1
 def Sequent.succedent (s : Sequent) : List PropForm := s.2
+def Sequent.has_common_elements (s : Sequent) : Bool :=
+  s.1.any (fun p => s.2.contains p)
 
 end LkpFormalization

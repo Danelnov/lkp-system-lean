@@ -1,5 +1,5 @@
 import LkpFormalization.Basic
-import LkpFormalization.BinaryTree
+import LkpFormalization.Data
 
 namespace LkpFormalization
 
