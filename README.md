@@ -41,5 +41,5 @@ Implement the rules of $\text{LK}^\prime$
   - [ ] Succedent conjunction rule
   - [x] Antecedent disjunction rule
   - [x] Succedent disjunction rules
-  - [ ] Implication rules
+  - [x] Implication rules
   - [x] Negation rules

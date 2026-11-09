@@ -90,11 +90,11 @@ def impl_right : BNTree Sequent → Option (BNTree Sequent)
 
 def impl_left : BNTree Sequent → BNTree Sequent →
     Option (BNTree Sequent)
-  | T₁@(node _ (Γ, Δ) _), T₂@(node _ (B :: Π, Λ) _) =>
+  | T₁@(node _ (Γ, Δ) _), T₂@(node _ (B :: Θ, Λ) _) =>
     match Δ.reverse with
     | [] => none
     | A :: Δ' =>
-      node T₁ ((A ⊃ₚ B) :: (Γ ++ Π), Δ'.reverse ++ Λ) T₂
+      node T₁ ((A ⊃ₚ B) :: (Γ ++ Θ), Δ'.reverse ++ Λ) T₂
   | _, _ => none
 
 end LkpFormalization
