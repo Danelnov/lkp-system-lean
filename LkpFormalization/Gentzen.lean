@@ -9,7 +9,7 @@ open BNTree Sequent PropForm
 namespace Gentzen
 
 def ax (s : Sequent) : Option (BNTree Sequent) :=
-  if s.has_common_elements then
+  if s.hasCommonElements then
     node leaf s leaf
   else
     none
@@ -82,19 +82,3 @@ def neg_right (i : Nat) : BNTree (Sequent) → Option (BNTree Sequent)
 end Gentzen
 
 open Gentzen
-
-def contrareci : BNTree Sequent :=
-  lk_derive [seq| ⊢ (P ⊃ Q) ⊃ (¬Q ⊃ ¬P)] by
-    apply_rule (impl_right 0) (P ⊃ Q ⊢ ¬Q ⊃ ¬P)
-    left
-    apply_rule (impl_right 1) (¬Q, P ⊃ Q ⊢ ¬P)
-    left
-    apply_rule (neg_left 0) (P ⊃ Q ⊢ Q, ¬P)
-    left
-    apply_rule (neg_right 1) (P, P ⊃ Q ⊢ Q)
-    left
-    apply_rule (impl_left 1) (P ⊢ P, Q) (Q, P ⊢ Q)
-    left
-    apply_rule (ax [seq| P ⊢ P, Q])
-    next
-    apply_rule (ax [seq| Q, P ⊢ Q])

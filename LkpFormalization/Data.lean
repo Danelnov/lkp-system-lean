@@ -46,6 +46,31 @@ inductive PTree (α : Type) where
   | node (left : PTree α) (value : α) (right : PTree α)
   deriving Inhabited, Repr
 
+namespace PTree
+
+variable {α : Type}
+
+def toBNTree : PTree α → BNTree α
+  | empty       => .leaf
+  | goal a      => .node .leaf a .leaf
+  | node l a r  => .node l.toBNTree a r.toBNTree
+
+instance : Coe (PTree α) (BNTree α) := ⟨PTree.toBNTree⟩
+instance [ToTypst α] : ToTypst (PTree α) := ⟨fun t => toTypst (t.toBNTree)⟩
+
+def insertLeft (t₁ t₂ : PTree α) : PTree α :=
+  match t₁ with
+  | node l a r => node (l.insertLeft t₂) a r
+  | _ => t₂
+
+def insertRight (t₁ t₂ : PTree α) : PTree α :=
+  match t₁ with
+  | node l a r => node l a (r.insertRight t₂)
+  | goal a => node empty a t₂
+  | empty => t₂
+
+end PTree
+
 inductive Ctx (α : Type) where
   | top : Ctx α
   | inLeft : Ctx α → α → PTree α → Ctx α

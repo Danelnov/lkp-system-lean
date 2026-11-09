@@ -14,6 +14,10 @@ inductive PropForm
 
 namespace PropForm
 
+def isAtomic : PropForm → Bool
+  | var _ => true
+  | _     => false
+
 notation:max "⊤ₚ" => PropForm.tr
 notation:max "⊥ₚ" => PropForm.fls
 prefix:90 "¬ₚ "   => PropForm.neg
@@ -61,7 +65,7 @@ instance : ToTypst Sequent where
 
 def Sequent.antecedent (s : Sequent) : List PropForm := s.1
 def Sequent.succedent (s : Sequent) : List PropForm := s.2
-def Sequent.has_common_elements (s : Sequent) : Bool :=
+def Sequent.hasCommonElements (s : Sequent) : Bool :=
   s.1.any (fun p => s.2.contains p)
 
 end LkpFormalization
